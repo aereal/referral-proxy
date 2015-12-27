@@ -1,2 +1,2 @@
-# referral
+# referral-proxy
 
