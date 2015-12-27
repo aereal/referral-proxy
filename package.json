@@ -1,6 +1,6 @@
 {
   "name": "referral-proxy",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A proxy server with Referer injection",
   "main": "../lib",
   "scripts": {
