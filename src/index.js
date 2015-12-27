@@ -22,11 +22,17 @@ function rewriteHeaders(proxyReq, req) {
 
 const args = parseArgs(process.argv.slice(2));
 const port = args.port;
+const authToken = args.token;
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
 http.createServer((req, res) => {
   drawRoute(req, res)
+    .then(([req, res]) => {
+      const { query: { token: reqToken } } = parseURL(req.url, true);
+      if (reqToken !== authToken) throw new ClientError('Invalid token', 401);
+      return [req, res];
+    })
     .then(([req, res]) => {
       return control(extractForwardURL.bind(this, req.url))
         .then(forwardURL => {
@@ -38,7 +44,7 @@ http.createServer((req, res) => {
         })
     })
     .catch(err => {
-      const httpError = err instanceof ClientError ? err : new ClientError('something bad', 500);
+      const httpError = 'statusCode' in err ? err : new ClientError('something bad', 500);
       res.writeHead(httpError.statusCode, { 'Content-Type': 'text/plain; charset=utf-8' });
       res.write(httpError.message + "\n");
       res.end()
