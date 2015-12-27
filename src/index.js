@@ -4,18 +4,19 @@ const formatURL = require('url').format;
 const parseURL  = require('url').parse;
 
 function createReferer(url) {
-  const parsed = parseURL(url);
+  const { protocol, hostname, port } = parseURL(url);
   return formatURL({
-    protocol: parsed.protocol,
-    hostname: parsed.hostname,
-    port: parsed.port,
+    protocol,
+    hostname,
+    port,
     pathname: '/',
   })
 }
 exports.createReferer = createReferer;
 
 function extractForwardURL(url) {
-  return parseURL(url, true).query['url'] || '';
+  const { query: { url: forwardURL } } = parseURL(url, true);
+  return forwardURL;
 }
 exports.extractForwardURL = extractForwardURL;
 
