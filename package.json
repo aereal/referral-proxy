@@ -2,13 +2,19 @@
   "name": "referral-proxy",
   "version": "0.0.1",
   "description": "A proxy server with Referer injection",
-  "main": "index.js",
+  "main": "../lib",
   "scripts": {
     "build": "babel --out-dir $npm_package_directories_lib $npm_package_directories_src",
     "start-server": "node bin/referral-proxy.js",
     "start": "npm run build && npm run start-server",
     "test": "npm run build && mocha"
   },
+  "bin": "./bin/referral-proxy.js",
+  "files": [
+    "bin",
+    "lib",
+    "src"
+  ],
   "directories": {
     "src": "src/",
     "lib": "lib/"
