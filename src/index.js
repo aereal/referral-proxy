@@ -6,26 +6,8 @@ const parseURL  = require('url').parse;
 import { control } from './control';
 import { ClientError } from './clientError';
 import { drawRoute } from './drawRoute';
-
-function createReferer(url) {
-  const { protocol, hostname, port } = parseURL(url);
-  return formatURL({
-    protocol,
-    hostname,
-    port,
-    pathname: '/',
-  })
-}
-exports.createReferer = createReferer;
-
-function extractForwardURL(url) {
-  if (!url) throw new Error('url must be given');
-  const { query: { url: forwardURL } } = parseURL(url, true);
-  const { href, hostname, protocol } = parseURL(forwardURL);
-  if ((hostname || '') === '' || (protocol || '') === '') throw new Error('Invalid url');
-  return href;
-}
-exports.extractForwardURL = extractForwardURL;
+import { createReferer } from './createReferer';
+import { extractForwardURL } from './extractForwardURL';
 
 function rewriteHeaders(proxyReq, req) {
   const forwardURL = extractForwardURL(req.url);
