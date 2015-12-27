@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "babel --out-dir $npm_package_directories_lib $npm_package_directories_src",
-    "start": "npm run build && node lib",
+    "start-server": "node bin/referral-proxy.js",
+    "start": "npm run build && npm run start-server",
     "test": "npm run build && mocha"
   },
   "directories": {
