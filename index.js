@@ -12,10 +12,12 @@ function createReferer(url) {
     pathname: '/',
   })
 }
+exports.createReferer = createReferer;
 
 function extractForwardURL(url) {
   return parseURL(url, true).query['url'] || '';
 }
+exports.extractForwardURL = extractForwardURL;
 
 function rewriteHeaders(proxyReq, req) {
   const forwardURL = extractForwardURL(req.url);
@@ -26,6 +28,7 @@ function rewriteHeaders(proxyReq, req) {
   proxyReq.setHeader('Host', forwarded.hostname);
   proxyReq.setHeader('Referer', referer);
 }
+exports.rewriteHeaders = rewriteHeaders;
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
