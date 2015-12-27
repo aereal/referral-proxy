@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const extractForwardURL = require('../').extractForwardURL;
+const extractForwardURL = require('../lib').extractForwardURL;
 
 describe('extractForwardURL', () => {
   it('returns the URL passed as `url` parameter value', () => {

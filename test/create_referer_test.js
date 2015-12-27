@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const createReferer = require('../').createReferer;
+const createReferer = require('../lib').createReferer;
 
 describe('createReferer', () => {
   it('returns original URL forced /', () => {
