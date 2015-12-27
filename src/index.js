@@ -22,11 +22,17 @@ function rewriteHeaders(proxyReq, req) {
 
 const args = parseArgs(process.argv.slice(2));
 const port = args.port;
+const authToken = '';
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
 http.createServer((req, res) => {
   drawRoute(req, res)
+    .then(([req, res]) => {
+      const { query: { token: reqToken } } = parseURL(req.url, true);
+      if (reqToken !== authToken) throw new ClientError('Invalid token', 401);
+      return [req, res];
+    })
     .then(([req, res]) => {
       return control(extractForwardURL.bind(this, req.url))
         .then(forwardURL => {
