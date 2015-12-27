@@ -15,8 +15,11 @@ function createReferer(url) {
 exports.createReferer = createReferer;
 
 function extractForwardURL(url) {
+  if (!url) throw new Error('url must be given');
   const { query: { url: forwardURL } } = parseURL(url, true);
-  return forwardURL;
+  const { href, hostname, protocol } = parseURL(forwardURL);
+  if ((hostname || '') === '' || (protocol || '') === '') throw new Error('Invalid url');
+  return href;
 }
 exports.extractForwardURL = extractForwardURL;
 

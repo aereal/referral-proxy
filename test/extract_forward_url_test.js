@@ -14,4 +14,20 @@ describe('extractForwardURL', () => {
     const given    = 'http://example.com/a/b/c?url=' + encodeURIComponent(forwardURL);
     assert.equal(extractForwardURL(given), forwardURL);
   });
+
+  it('cannot parse the URL with no protocol', () => {
+    const invalidURL = 'ht';
+    const given    = 'http://example.com/a/b/c?url=' + encodeURIComponent(invalidURL);
+    var err;
+    try { extractForwardURL(given) } catch (e) { err = e }
+    assert(err instanceof Error);
+  });
+
+  it('cannot parse http://', () => {
+    const invalidURL = 'http://';
+    const given    = 'http://example.com/a/b/c?url=' + encodeURIComponent(invalidURL);
+    var err;
+    try { extractForwardURL(given) } catch (e) { err = e }
+    assert(err instanceof Error);
+  });
 })
