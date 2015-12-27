@@ -44,7 +44,7 @@ http.createServer((req, res) => {
         })
     })
     .catch(err => {
-      const httpError = err instanceof ClientError ? err : new ClientError('something bad', 500);
+      const httpError = 'statusCode' in err ? err : new ClientError('something bad', 500);
       res.writeHead(httpError.statusCode, { 'Content-Type': 'text/plain; charset=utf-8' });
       res.write(httpError.message + "\n");
       res.end()
