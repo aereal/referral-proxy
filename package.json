@@ -25,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/aereal/referral-proxy/issues"
   },
-  "homepage": "https://github.com/aereal/referral-proxy#readme"
+  "homepage": "https://github.com/aereal/referral-proxy#readme",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
 }
