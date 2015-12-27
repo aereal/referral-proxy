@@ -1,7 +1,7 @@
 {
   "name": "referral-proxy",
   "version": "0.0.1",
-  "description": "",
+  "description": "A proxy server with Referer injection",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
