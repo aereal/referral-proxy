@@ -18,7 +18,6 @@ function rewriteHeaders(proxyReq, req) {
   proxyReq.setHeader('Host', forwarded.hostname);
   proxyReq.setHeader('Referer', referer);
 }
-exports.rewriteHeaders = rewriteHeaders;
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
