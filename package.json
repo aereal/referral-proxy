@@ -4,8 +4,13 @@
   "description": "A proxy server with Referer injection",
   "main": "index.js",
   "scripts": {
+    "build": "babel --out-dir $npm_package_directories_lib $npm_package_directories_src",
     "start": "node index.js",
     "test": "mocha"
+  },
+  "directories": {
+    "src": "src/",
+    "lib": "lib/"
   },
   "keywords": [],
   "author": "aereal",
