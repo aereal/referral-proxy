@@ -8,6 +8,7 @@ import { ClientError } from './clientError';
 import { drawRoute } from './drawRoute';
 import { createReferer } from './createReferer';
 import { extractForwardURL } from './extractForwardURL';
+import { parseArgs } from './parseArgs';
 
 function rewriteHeaders(proxyReq, req) {
   const forwardURL = extractForwardURL(req.url);
@@ -18,6 +19,9 @@ function rewriteHeaders(proxyReq, req) {
   proxyReq.setHeader('Host', forwarded.hostname);
   proxyReq.setHeader('Referer', referer);
 }
+
+const args = parseArgs(process.argv.slice(2));
+const port = args.port;
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
@@ -39,4 +43,4 @@ http.createServer((req, res) => {
       res.write(httpError.message + "\n");
       res.end()
     })
-}).listen(9090);
+}).listen(port);
