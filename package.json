@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel --out-dir $npm_package_directories_lib $npm_package_directories_src",
     "start": "node index.js",
-    "test": "mocha"
+    "test": "npm run build && mocha"
   },
   "directories": {
     "src": "src/",
