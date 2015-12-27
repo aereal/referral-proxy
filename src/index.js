@@ -22,7 +22,7 @@ function rewriteHeaders(proxyReq, req) {
 
 const args = parseArgs(process.argv.slice(2));
 const port = args.port;
-const authToken = '';
+const authToken = args.token;
 
 const proxy = httpProxy.createProxyServer({});
 proxy.on('proxyReq', rewriteHeaders);
